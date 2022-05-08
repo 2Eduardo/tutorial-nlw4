@@ -15,7 +15,7 @@ routes.post('/feedbacks', async (req, res) => {
     await submitFeedbackService.execute(req.body);
   }
   catch (err) {
-    return res.status(501).send(err);
+    return res.status(500).send();
   }
 
   return res.status(201).send();
