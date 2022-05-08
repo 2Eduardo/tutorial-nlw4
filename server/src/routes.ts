@@ -10,7 +10,13 @@ routes.post('/feedbacks', async (req, res) => {
     new PrismaFeedbackRepository(),
     new NodemailerMailAdapter()
   );
-  submitFeedbackService.execute(req.body);
+
+  try {
+    await submitFeedbackService.execute(req.body);
+  }
+  catch (err) {
+    return res.status(501).send(err);
+  }
 
   return res.status(201).send();
 });
